@@ -297,7 +297,7 @@ function get_k3s {
   helm repo update
 
   echo "####### EW "
-  helm install ingress-nginx ingress-nginx/ingress-nginx --version="${NGINX_INGRESS_VERSION}"
+  #EW helm install ingress-nginx ingress-nginx/ingress-nginx --version="${NGINX_INGRESS_VERSION}"
 
   # wait for nginx to be ready
 
