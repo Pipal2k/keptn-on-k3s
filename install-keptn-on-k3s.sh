@@ -296,6 +296,7 @@ function get_k3s {
   helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
   helm repo update
 
+  echo "####### EW "
   helm install ingress-nginx ingress-nginx/ingress-nginx --version="${NGINX_INGRESS_VERSION}"
 
   # wait for nginx to be ready
