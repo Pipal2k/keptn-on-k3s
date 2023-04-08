@@ -237,7 +237,8 @@ function get_fqdn {
     FQDN="${MY_IP}"
 
     if [[ "${LE_STAGE}" == "staging" ]] || [[ "${NIP}" == "true" ]]; then
-      FQDN="$(get_nip_address "${MY_IP}")"
+      #EW changed to xip
+      FQDN="$(get_xip_address "${MY_IP}")"
     fi
     if [[ "${LE_STAGE}" == "production" ]]; then
       echo "Issuing Production LetsEncrypt Certificates with nip.io as domain is not possible"
