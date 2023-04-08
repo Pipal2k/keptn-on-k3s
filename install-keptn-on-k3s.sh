@@ -1293,8 +1293,7 @@ function main {
           aws)
             echo "Provider: AWS"
             #MY_IP="$(curl -s http://169.254.169.254/latest/meta-data/public-ipv4)"
-            MY_IP="$(curl -H "X-aws-ec2-metadata-token: $TOKEN" -s http://169.254.169.254/latest/meta-data/public-ipv4)
-)"
+            MY_IP="$(curl -H "X-aws-ec2-metadata-token: $TOKEN" -s http://169.254.169.254/latest/meta-data/public-ipv4)"
             shift 2
             ;;
           digitalocean)
