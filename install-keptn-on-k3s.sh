@@ -237,8 +237,7 @@ function get_fqdn {
     FQDN="${MY_IP}"
 
     if [[ "${LE_STAGE}" == "staging" ]] || [[ "${NIP}" == "true" ]]; then
-      #EW changed to xip
-      FQDN="$(get_xip_address "${MY_IP}")"
+      FQDN="$(get_nip_address "${MY_IP}")"
     fi
     if [[ "${LE_STAGE}" == "production" ]]; then
       echo "Issuing Production LetsEncrypt Certificates with nip.io as domain is not possible"
@@ -1295,7 +1294,8 @@ function main {
           aws)
             echo "Provider: AWS"
             #MY_IP="$(curl -s http://169.254.169.254/latest/meta-data/public-ipv4)"
-            MY_IP="$(curl -H "X-aws-ec2-metadata-token: AQAEACrTWFJg293RKSC5Joe46teFVt9GmPWMYtzvaTVzaED-Afl0EA==" -s http://169.254.169.254/latest/meta-data/public-ipv4)"
+            TOKEN=$(curl -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600")
+            MY_IP="$(curl -H "X-aws-ec2-metadata-token: $TOKEN" -s http://169.254.169.254/latest/meta-data/public-ipv4)"
             shift 2
             ;;
           digitalocean)
